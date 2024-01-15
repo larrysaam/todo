@@ -1,0 +1,104 @@
+
+.header{
+    width: 100%;
+    background-color: White;
+    text-align: center;
+}
+
+.header h1{
+    color: Black;
+    font-size: 24px;
+}
+
+.form{
+    width: 100%;
+    margin-top: 30px;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+
+}
+
+#taskinput{
+    width: 60%;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 20px;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+#submitbtn{
+    width: 80px;
+    height: 40px;
+    background-color: rgb(3, 3, 138);
+    font-size: 16px;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    margin-left: 10px;
+}
+
+
+/* list */
+
+.listdiv{
+    text-align: center;
+    justify-content: center;
+}
+
+.todoli{
+    width: 80%;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid rgb(1, 1, 107);
+    background-color: none;
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.list{
+    background-color: none;
+    border: none;
+    color:rgb(1, 1, 107);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#donebtn{
+    height: 30px;
+    width: 30px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+
+#editbtn{
+    height: 30px;
+    width: 30px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+
+#deletebtn{
+    height: 30px;
+    width: 30px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+#emptymsg{
+    font-size: 30px;
+    color: rgb(3, 3, 85);
+    font-weight: bold;
+}
