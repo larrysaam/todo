@@ -1,37 +1,49 @@
 import React from "react";
 import './style.css'
+import { toast } from 'react-toastify';
 import { useState, useEffect } from "react";
+import axios from 'axios'
 
 const Form =({task, setTask, edit, setEdit})=>{
 
+    let newtask = {}
     const [taskname, setTaskname] = useState('')
-    const [id, setId] = useState()
+    const [input, setInput] = useState({})
+    const [newdata, setNewdata] = useState({})
+    const [id, setId] = useState(null)
 
     useEffect(()=>{
-        setId(0)
+        console.log(task)
         if(edit){
-            setTaskname(edit[0].taskname)
-            console.log("edit input "+ edit[0].taskname)
+            setTaskname(edit.taskname)
+            console.log("edit input "+ edit)
         }else{
 
         }
-    },[edit, setTaskname])
+    },[edit, setTaskname, task])
 
 
     //handle input changes
     const handleOnchange = (event) =>{
-        console.log(event.target.value)
         setTaskname(event.target.value)
+        console.log(taskname)
     }
 
+
     //update selected todo
-    const updatetodo = (id, taskname)=>{
-        const newtask = task.map((todo)=>
-            todo.id === id ? {id, taskname} : todo
-        )
-        setTask(newtask)
-        setEdit('')
-        setTaskname('')
+    const updatetodo = async(id)=>{
+        // newtask = task.map((todo)=> todo._id === _id ? {_id, id, taskname, completed} : todo )
+        try {
+            const response = await axios.patch("http://localhost:8000/api/tasks/"+id,
+            {taskname: taskname},
+            {headers:{ "Content-Type": "application/json"}})
+            setEdit(null)
+            setTaskname(null)
+            toast.success("Edit successful")
+            // change task without adding change to settask
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
@@ -39,17 +51,34 @@ const Form =({task, setTask, edit, setEdit})=>{
     const submitForm = (event)=>{
         event.preventDefault()
         if(edit){
-            updatetodo(edit[0].id, taskname)
+            updatetodo(edit._id)
         }else{
             if(!taskname){
-                alert('Please input a Task first')
+                toast.error('Please input a Task Name first')
             }else{
-                setId(id + 1)
-                setTask([...task, {"id": taskname, "taskname": taskname}])
-                console.log("Taskname : ----" + task)
+                setInput({"taskname": taskname, "completed": false})
+                createTask()
             }
         }
     }
+
+
+    //create new task
+    const createTask = async()=>{
+        const url = 'http://localhost:8000/api/tasks'
+
+        try {
+            await axios.post(url, 
+            input,
+            {headers:{ "Content-Type": "application/json"}})
+            setTask([...task, input])
+            toast.success("Task Added Successfully")
+        } catch (error) {
+            console.log(`task not created because: ${error}`)
+        }
+
+    }
+
 
 
     return(
@@ -63,7 +92,7 @@ const Form =({task, setTask, edit, setEdit})=>{
                     onChange={handleOnchange} 
                     value={taskname}
                 />
-                <button id="submitbtn" type="submit">{edit ? "Ok" : "Add"}</button>
+                <button id="submitbtn" type="submit">{(edit) ? "Ok" : "Add"}</button>
             </form>
         </div>
     );

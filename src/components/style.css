@@ -50,9 +50,24 @@
 .todoli{
     width: 80%;
     height: 40px;
-    border-radius: 20px;
+    border-radius: 5px;
     border: 2px solid rgb(1, 1, 107);
+    border-left: 5px solid blue;
     background-color: none;
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.done_todoli{
+    width: 80%;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid rgb(1, 1, 107);
+    border-left: 5px solid green;
+    background-color: gr;
     padding-left: 10px;
     display: flex;
     justify-content: space-around;
@@ -69,32 +84,20 @@
 }
 
 #donebtn{
-    height: 30px;
-    width: 30px;
-    background-color: blue;
-    color: white;
-    border: none;
-    border-radius: 20px;
+    margin-top: 10px;
+    color: blue;
 }
 
 
 #editbtn{
-    height: 30px;
-    width: 30px;
-    background-color: green;
-    color: white;
-    border: none;
-    border-radius: 20px;
+    margin-top: 10px;
+    color: purple;
 }
 
 
 #deletebtn{
-    height: 30px;
-    width: 30px;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 20px;
+    margin-top: 10px;
+    color: red;
 }
 
 #emptymsg{

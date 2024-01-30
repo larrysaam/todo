@@ -1,46 +1,39 @@
 import React from "react";
 import './style.css'
-import { useEffect } from "react";
-// import useFetchTasks from './hooks/useFetchTasks'
+import {FaCheckDouble, FaEdit, FaRegTrashAlt} from 'react-icons/fa'
+import { useEffect, useState } from "react";
 
-const Todolist =({task, setEdit})=>{
 
-    // const url = "localhost:/8000/api/tasks"
-    // const {response, error, loading} = useFetchTasks(url)
-    
+const Todolist =({ task, setEdit, handleDelete, handleTaskCompletion})=>{
+
     useEffect(()=>{
-        console.log("----___---"+task)
-      })
+        console.log(task)
+    },[task])
 
     
     //handle edite button
-    const handleEdit =(id)=>{
-        const findtodo = task.filter(todo => todo.id === id)
-        setEdit(findtodo)
-        console.log("edit_____" + findtodo)
+    const handleEdit =(editTask)=>{
+        setEdit(editTask)
+        console.log( editTask)
     }
-
+    
 
     return(
         <>
-            {/* {error && <p>An Error just occured</p>}
-            {loading && <p>Loading...</p>}
-            {response && todo} */}
+          <>
 
-            <>
-
-                {task.length === 0 && <p id="emptymsg">Empty</p>}
-                { task && task.map((list, index) =>{
-                    return (
-                        <div className="todoli" key={index} >
-                            <input type="text" value={list.taskname} className="list"/>
-                            <button id="donebtn">d</button>
-                            <button id="editbtn" onClick={()=>handleEdit(list.id)}>e</button>
-                            <button id="deletebtn">r</button>
-                        </div>
-                    )
-                }
-                )}
+            {task && 
+            task.map((list, index) =>{
+                return (
+                    <div className={(!task.completed)? "todoli" : "done_todoli"} key={index} >
+                        <input type="text" value={list.taskname} className="list"/>
+                        <FaCheckDouble id="donebtn" onClick={()=>handleTaskCompletion(list)}/>
+                        <FaEdit id="editbtn" onClick={()=>{handleEdit(list)}}/>
+                        <FaRegTrashAlt id="deletebtn" onClick={()=>handleDelete(list._id)}/>
+                    </div>
+                )
+            }
+            )}
             </>
         </>
     );
